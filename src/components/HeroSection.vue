@@ -16,8 +16,8 @@
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-md px-4">
-      <a
-        href="/projects"
+      <router-link
+        to="/projects"
         class="px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transition-all text-center"
         style="background-color: #7c3aed; color: #fff"
         @mouseover="hover1 = true"
@@ -27,10 +27,10 @@
         :style="hover1 ? 'background-color:#3B82F6; transform:translateY(-2px)' : ''"
       >
         View My Work
-      </a>
+      </router-link>
 
-      <a
-        href="/about-me"
+      <router-link
+        to="/about-me"
         class="px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transition-all text-center"
         style="background-color: #7c3aed; color: #fff"
         @mouseover="hover2 = true"
@@ -40,7 +40,7 @@
         :style="hover2 ? 'background-color:#3B82F6; transform:translateY(-2px)' : ''"
       >
         About Me
-      </a>
+      </router-link>
     </div>
   </section>
 </template>
