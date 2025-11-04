@@ -48,18 +48,57 @@
     </p>
 
     <div class="flex flex-wrap gap-3">
-      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Python</span>
-      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">SQL</span>
-      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Excel</span>
-      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Tableau</span>
-      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Vue.js</span>
-      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Pandas</span>
-      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">GitHub</span>
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md flex items-center gap-1">
+        <vIcon name="co-python" scale="1.2" class="text-yellow-500" /> Python
+      </span>
+
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md flex items-center gap-1">
+        <vIcon name="vi-file-type-sql" scale="1.2" class="text-blue-500" /> SQL
+      </span>
+
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md flex items-center gap-1">
+        <vIcon name="bi-file-earmark-excel-fill" scale="1.2" class="text-green-600" /> Excel
+      </span>
+
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md flex items-center gap-1">
+        <vIcon name="co-tableau" scale="1.2" class="text-indigo-500" /> Tableau
+      </span>
+
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md flex items-center gap-1">
+        <vIcon name="co-vue-js" scale="1.2" class="text-green-500" /> Vue.js
+      </span>
+
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md flex items-center gap-1">
+        <vIcon name="si-pandas" scale="1.2" class="text-black" /> Pandas
+      </span>
+
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md flex items-center gap-1">
+        <vIcon name="fa-github-alt" scale="1.2" class="text-gray-700" /> GitHub
+      </span>
     </div>
   </section>
 </template>
 
 <script setup>
+import { OhVueIcon, addIcons } from 'oh-vue-icons'
+
+// import all the icons you want
+import {
+  CoPython,
+  ViFileTypeSql,
+  BiFileEarmarkExcelFill,
+  CoTableau,
+  CoVueJs,
+  SiPandas,
+  FaGithubAlt,
+} from 'oh-vue-icons/icons'
+
+// register them together
+addIcons(CoPython, ViFileTypeSql, BiFileEarmarkExcelFill, CoTableau, CoVueJs, SiPandas, FaGithubAlt)
+
+// make the icon component available in the template
+const vIcon = OhVueIcon
+
 function downloadResume() {
   const link = document.createElement('a')
   link.href = '/current_resume.pdf'
