@@ -5,11 +5,9 @@
       <p class="text-gray-700">Have a project, a question, or feedback? Drop me a note.</p>
     </header>
 
-    <!-- v-if toggles between form and success message -->
     <form
       v-if="!submitted"
       name="contact"
-      netlify
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
@@ -19,7 +17,7 @@
       <input type="hidden" name="form-name" value="contact" />
       <p class="hidden">
         <label>
-          Don’t fill this out if you’re human:
+          Don't fill this out if you're human:
           <input name="bot-field" />
         </label>
       </p>
@@ -58,7 +56,7 @@
           rows="6"
           required
           class="w-full border rounded-md px-3 py-2"
-          placeholder="Tell me a bit about what you’re looking for…"
+          placeholder="Tell me a bit about what you're looking for…"
         ></textarea>
       </label>
 
@@ -70,15 +68,18 @@
       </button>
     </form>
 
-    <!-- Success message -->
     <div v-else class="text-center space-y-3">
       <h2 class="text-2xl font-semibold text-green-700">Thank you!</h2>
       <p class="text-gray-700">
-        Your message has been sent successfully. I’ll get back to you soon!
+        Your message has been sent successfully. I'll get back to you soon!
       </p>
     </div>
   </section>
-  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+
+  <!-- Static form for Netlify detection - must match the dynamic form exactly -->
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="contact" />
+    <input type="text" name="bot-field" />
     <input type="text" name="name" />
     <input type="email" name="email" />
     <textarea name="message"></textarea>
@@ -88,24 +89,20 @@
 <script setup>
 import { reactive, ref } from 'vue'
 
-// reactive form state
 const form = reactive({
   name: '',
   email: '',
   message: '',
 })
 
-// flag for successful submission
 const submitted = ref(false)
 
-// encode data for Netlify POST
 function encode(data) {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
     .join('&')
 }
 
-// handle the form submission
 async function handleSubmit() {
   try {
     await fetch('/', {
@@ -113,12 +110,14 @@ async function handleSubmit() {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': 'contact',
+        'bot-field': '', // Include honeypot field
         ...form,
       }),
     })
     submitted.value = true
   } catch (error) {
     console.error('Form submission error:', error)
+    alert('There was an error submitting the form. Please try again.')
   }
 }
 </script>
