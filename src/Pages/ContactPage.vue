@@ -9,6 +9,7 @@
     <form
       v-if="!submitted"
       name="contact"
+      netlify
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
