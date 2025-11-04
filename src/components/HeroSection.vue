@@ -7,11 +7,19 @@
       Hi, I’m Robin Kelsick. I help teams find clarity in data—and build the tools to make it
       happen.
     </p>
-    <a
-      href="#projects"
-      class="bg-indigo-600 hover:bg-indigo-700 transition-colors px-6 py-3 rounded-full font-semibold"
-    >
-      View My Work
-    </a>
+    <div class="flex flex-col md:flex-row gap-4 justify-center">
+      <a
+        href="projects"
+        class="bg-indigo-600 hover:bg-indigo-700 transition-colors px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg"
+      >
+        View My Work
+      </a>
+      <a
+        href="about-me"
+        class="bg-indigo-600 hover:bg-indigo-700 transition-colors px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg"
+      >
+        About Me
+      </a>
+    </div>
   </section>
 </template>
