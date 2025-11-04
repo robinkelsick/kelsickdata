@@ -27,7 +27,7 @@
 <script setup>
 function downloadResume() {
   const link = document.createElement('a')
-  link.href = '/assets/Robin_Kelsick_Resume.pdf'
+  link.href = '/current_resume.pdf'
   link.download = 'Robin_Kelsick_Resume.pdf'
   link.click()
 }
