@@ -1,40 +1,40 @@
 <template>
   <section
-    class="py-10 flex flex-col items-center"
+    class="py-6 sm:py-10 flex flex-col items-center px-4"
     style="background-color: #111827; color: #e5e7eb; font-family: 'Inter', sans-serif"
   >
     <h2
-      class="text-3xl font-bold mb-6 text-center"
+      class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center"
       style="font-family: 'Poppins', sans-serif; color: #e5e7eb"
     >
       Average Rating by Genre
     </h2>
 
     <!-- Chart -->
-    <div ref="chartWrapper" class="max-w-3xl w-full mb-10 mx-auto">
-      <canvas ref="chartCanvas" class="w-full" style="min-height: 400px"></canvas>
+    <div ref="chartWrapper" class="max-w-3xl w-full mb-6 sm:mb-10 mx-auto">
+      <canvas ref="chartCanvas" class="w-full" style="height: 350px; max-height: 500px"></canvas>
     </div>
 
     <!-- Add Entry Form -->
     <form
       @submit.prevent="addEntry"
-      class="flex flex-col gap-4 p-6 rounded-lg w-full max-w-md"
+      class="flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-lg w-full max-w-md"
       style="background-color: #1e293b"
     >
-      <h3 class="text-xl font-semibold" style="font-family: 'Poppins', sans-serif">
+      <h3 class="text-lg sm:text-xl font-semibold" style="font-family: 'Poppins', sans-serif">
         Add Your Own Rating
       </h3>
       <input
         v-model="newAnime.title"
         placeholder="Title"
-        class="p-2 rounded text-white"
+        class="p-2 rounded text-white text-sm sm:text-base"
         style="background-color: #111827"
         required
       />
       <input
         v-model="newAnime.genre"
         placeholder="Genre"
-        class="p-2 rounded text-white"
+        class="p-2 rounded text-white text-sm sm:text-base"
         style="background-color: #111827"
         required
       />
@@ -42,18 +42,21 @@
         v-model.number="newAnime.rating"
         placeholder="Rating (1–10)"
         type="number"
+        step="0.1"
         min="1"
         max="10"
-        class="p-2 rounded text-white"
+        class="p-2 rounded text-white text-sm sm:text-base"
         style="background-color: #111827"
         required
       />
       <button
         type="submit"
-        class="py-2 rounded text-white transition-transform"
+        class="py-2 rounded text-white transition-transform text-sm sm:text-base"
         style="background-color: #7c3aed; box-shadow: 0 4px 10px rgba(124, 58, 237, 0.4)"
         @mouseover="hoverAdd = true"
         @mouseleave="hoverAdd = false"
+        @touchstart="hoverAdd = true"
+        @touchend="hoverAdd = false"
         :style="hoverAdd ? 'background-color:#3B82F6; transform:translateY(-2px);' : ''"
       >
         Add Entry
@@ -61,28 +64,33 @@
     </form>
 
     <!-- Bottom Controls -->
-    <div class="w-full max-w-md mt-3 flex items-center justify-between gap-3">
+    <div
+      class="w-full max-w-md mt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
+    >
       <button
         type="button"
         @click="downloadCSV"
-        class="py-2 px-4 rounded text-white transition"
+        class="py-2 px-4 rounded text-white transition text-sm"
         style="background-color: #10b981"
       >
         Download CSV
       </button>
 
-      <div class="flex items-center gap-3">
-        <span class="text-sm" style="color: #9ca3af">Saved:</span>
-        <span class="text-sm px-2 py-1 rounded" style="background-color: #1e293b; color: #e5e7eb">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="text-xs sm:text-sm whitespace-nowrap" style="color: #9ca3af">Saved:</span>
+        <span
+          class="text-xs sm:text-sm px-2 py-1 rounded"
+          style="background-color: #1e293b; color: #e5e7eb"
+        >
           {{ userEntriesCount }}
         </span>
         <button
           type="button"
           @click="clearSavedEntries"
-          class="py-2 px-3 rounded text-sm text-white"
+          class="py-2 px-3 rounded text-xs sm:text-sm text-white whitespace-nowrap"
           style="background-color: #e11d48"
         >
-          Clear saved entries
+          Clear saved
         </button>
       </div>
     </div>
@@ -97,7 +105,7 @@ import Papa from 'papaparse'
 /* ===== COSMIC DATA THEME (Chart.js global defaults) ===== */
 Chart.defaults.color = '#E5E7EB'
 Chart.defaults.font.family = "'Inter', sans-serif"
-Chart.defaults.borderColor = 'rgba(59,130,246,0.3)' // gridlines
+Chart.defaults.borderColor = 'rgba(59,130,246,0.3)'
 Chart.defaults.elements.bar.borderRadius = 6
 Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(17,24,39,0.9)'
 Chart.defaults.plugins.tooltip.titleColor = '#7C3AED'
@@ -174,11 +182,20 @@ onMounted(() => {
 
       renderChart()
     },
+    error: (err) => {
+      console.error('Failed to load CSV:', err)
+    },
   })
 })
 
 function renderChart() {
-  if (chartInstance.value) chartInstance.value.destroy()
+  if (chartInstance.value) {
+    chartInstance.value.destroy()
+    chartInstance.value = null
+  }
+
+  const ctx = chartCanvas.value
+  if (!ctx) return
 
   // Compute average rating per genre
   const genreMap = {}
@@ -210,7 +227,7 @@ function renderChart() {
   const colors = top.map((_, i) => COSMIC_COLORS[i % COSMIC_COLORS.length])
 
   // Bar chart
-  chartInstance.value = new Chart(chartCanvas.value, {
+  chartInstance.value = new Chart(ctx, {
     type: 'bar',
     data: {
       labels,
@@ -218,7 +235,7 @@ function renderChart() {
         {
           label: 'Average Rating',
           data: averages,
-          backgroundColor: colors.map((c) => `${c}B3`), // translucent fill
+          backgroundColor: colors.map((c) => `${c}B3`),
           borderColor: colors,
           borderWidth: 1.5,
           hoverBackgroundColor: colors.map((c) => `${c}`),
@@ -226,10 +243,16 @@ function renderChart() {
       ],
     },
     options: {
+      responsive: true,
       maintainAspectRatio: false,
       scales: {
         x: {
-          ticks: { color: '#E5E7EB', font: { size: 12 } },
+          ticks: {
+            color: '#E5E7EB',
+            font: { size: 11 },
+            maxRotation: 45,
+            minRotation: 45,
+          },
         },
         y: {
           beginAtZero: true,
@@ -264,6 +287,12 @@ function addEntry() {
     rating: Number(newAnime.value.rating),
     isUser: true,
   }
+
+  if (!entry.genres || !Number.isFinite(entry.rating)) {
+    alert('Please enter valid genre and rating')
+    return
+  }
+
   chartData.value.push(entry)
 
   try {
@@ -282,6 +311,8 @@ function addEntry() {
 }
 
 function clearSavedEntries() {
+  if (!confirm('Are you sure you want to clear all saved entries?')) return
+
   try {
     localStorage.removeItem(STORAGE_KEY)
   } catch (err) {
@@ -315,7 +346,8 @@ function downloadCSV() {
 
 <style scoped>
 canvas {
-  width: 100%;
-  min-height: 400px;
+  width: 100% !important;
+  height: 350px !important;
+  max-height: 500px !important;
 }
 </style>

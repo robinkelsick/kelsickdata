@@ -1,42 +1,46 @@
 <template>
   <section
-    class="py-10 flex flex-col items-center"
+    class="py-6 sm:py-10 flex flex-col items-center px-4"
     style="background-color: #111827; color: #e5e7eb; font-family: 'Inter', sans-serif"
   >
     <h2
-      class="text-3xl font-bold mb-6 text-center"
+      class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center"
       style="font-family: 'Poppins', sans-serif; color: #e5e7eb"
     >
       Popularity vs Rating
     </h2>
 
-    <div
-      class="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 w-full max-w-4xl"
-    >
-      <div class="flex items-center gap-3">
-        <button
-          type="button"
-          @click="mode = 'scatter'"
-          class="py-1 px-3 rounded text-white"
-          :style="mode === 'scatter' ? 'background-color:#7C3AED;' : 'background-color:#1E293B;'"
-        >
-          Scatter
-        </button>
-        <button
-          type="button"
-          @click="mode = 'aggregate'"
-          class="py-1 px-3 rounded text-white"
-          :style="mode === 'aggregate' ? 'background-color:#7C3AED;' : 'background-color:#1E293B;'"
-        >
-          Aggregate (binned avg)
-        </button>
+    <!-- Controls Section -->
+    <div class="mb-4 flex flex-col gap-4 w-full max-w-4xl">
+      <!-- Mode and Scale Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <div class="flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            @click="mode = 'scatter'"
+            class="py-1 px-3 rounded text-white text-sm"
+            :style="mode === 'scatter' ? 'background-color:#7C3AED;' : 'background-color:#1E293B;'"
+          >
+            Scatter
+          </button>
+          <button
+            type="button"
+            @click="mode = 'aggregate'"
+            class="py-1 px-3 rounded text-white text-sm"
+            :style="
+              mode === 'aggregate' ? 'background-color:#7C3AED;' : 'background-color:#1E293B;'
+            "
+          >
+            Aggregate
+          </button>
+        </div>
 
-        <div class="ml-4 flex items-center gap-2">
-          <span class="text-sm" style="color: #9ca3af">X axis:</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-xs sm:text-sm whitespace-nowrap" style="color: #9ca3af">X axis:</span>
           <button
             type="button"
             @click="xScaleType = 'linear'"
-            class="py-1 px-3 rounded text-white"
+            class="py-1 px-3 rounded text-white text-sm"
             :style="
               xScaleType === 'linear' ? 'background-color:#7C3AED;' : 'background-color:#1E293B;'
             "
@@ -46,7 +50,7 @@
           <button
             type="button"
             @click="xScaleType = 'log'"
-            class="py-1 px-3 rounded text-white"
+            class="py-1 px-3 rounded text-white text-sm"
             :style="
               xScaleType === 'log' ? 'background-color:#7C3AED;' : 'background-color:#1E293B;'
             "
@@ -56,8 +60,9 @@
         </div>
       </div>
 
-      <div class="p-3 rounded text-sm" style="background-color: #1e293b; color: #e5e7eb">
-        <div class="flex gap-4">
+      <!-- Stats Box -->
+      <div class="p-3 rounded text-xs sm:text-sm" style="background-color: #1e293b; color: #e5e7eb">
+        <div class="flex flex-wrap gap-2 sm:gap-4">
           <div>
             Count: <strong>{{ stats.count }}</strong>
           </div>
@@ -68,35 +73,36 @@
             Median ★: <strong>{{ stats.medianRating ?? '—' }}</strong>
           </div>
         </div>
-        <div class="mt-2 flex gap-4">
+        <div class="mt-2 flex flex-wrap gap-2 sm:gap-4">
           <div>
             Std ★: <strong>{{ stats.stdRating ?? '—' }}</strong>
           </div>
           <div>
-            Members min/max: <strong>{{ stats.minMembers ?? '—' }}</strong> /
+            Members: <strong>{{ stats.minMembers ?? '—' }}</strong> /
             <strong>{{ stats.maxMembers ?? '—' }}</strong>
           </div>
         </div>
       </div>
     </div>
 
-    <div ref="chartWrapper" class="max-w-4xl w-full mb-10 mx-auto">
-      <canvas ref="chartCanvas" class="w-full" style="min-height: 500px"></canvas>
+    <!-- Chart -->
+    <div ref="chartWrapper" class="max-w-4xl w-full mb-6 sm:mb-10 mx-auto">
+      <canvas ref="chartCanvas" class="w-full" style="height: 400px; max-height: 500px"></canvas>
     </div>
 
     <!-- Add Entry Form -->
     <form
       @submit.prevent="addEntry"
-      class="flex flex-col gap-4 p-6 rounded-lg w-full max-w-md"
+      class="flex flex-col gap-3 sm:gap-4 p-4 sm:p-6 rounded-lg w-full max-w-md"
       style="background-color: #1e293b"
     >
-      <h3 class="text-xl font-semibold" style="font-family: 'Poppins', sans-serif">
+      <h3 class="text-lg sm:text-xl font-semibold" style="font-family: 'Poppins', sans-serif">
         Add Your Own Anime
       </h3>
       <input
         v-model="newAnime.title"
         placeholder="Title"
-        class="p-2 rounded text-white"
+        class="p-2 rounded text-white text-sm sm:text-base"
         style="background-color: #111827"
         required
       />
@@ -104,7 +110,7 @@
         v-model.number="newAnime.members"
         placeholder="Members (popularity count)"
         type="number"
-        class="p-2 rounded text-white"
+        class="p-2 rounded text-white text-sm sm:text-base"
         style="background-color: #111827"
         required
       />
@@ -112,46 +118,54 @@
         v-model.number="newAnime.rating"
         placeholder="Rating (1–10)"
         type="number"
+        step="0.1"
         min="1"
         max="10"
-        class="p-2 rounded text-white"
+        class="p-2 rounded text-white text-sm sm:text-base"
         style="background-color: #111827"
         required
       />
       <button
         type="submit"
-        class="py-2 rounded text-white transition-transform"
+        class="py-2 rounded text-white transition-transform text-sm sm:text-base"
         style="background-color: #7c3aed; box-shadow: 0 4px 10px rgba(124, 58, 237, 0.4)"
         @mouseover="hoverAdd = true"
         @mouseleave="hoverAdd = false"
+        @touchstart="hoverAdd = true"
+        @touchend="hoverAdd = false"
         :style="hoverAdd ? 'background-color:#3B82F6; transform:translateY(-2px);' : ''"
       >
         Add Entry
       </button>
     </form>
 
-    <div class="w-full max-w-md mt-3 flex items-center justify-between gap-3">
+    <!-- Action Buttons -->
+    <div
+      class="w-full max-w-md mt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
+    >
       <button
         type="button"
         @click="downloadCSV"
-        class="py-2 px-4 rounded text-white transition"
+        class="py-2 px-4 rounded text-white transition text-sm"
         style="background-color: #10b981"
       >
         Download CSV
       </button>
 
-      <div class="flex items-center gap-3">
-        <span class="text-sm" style="color: #9ca3af">Saved:</span>
-        <span class="text-sm px-2 py-1 rounded" style="background-color: #1e293b; color: #e5e7eb">{{
-          userEntriesCount
-        }}</span>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="text-xs sm:text-sm whitespace-nowrap" style="color: #9ca3af">Saved:</span>
+        <span
+          class="text-xs sm:text-sm px-2 py-1 rounded"
+          style="background-color: #1e293b; color: #e5e7eb"
+          >{{ userEntriesCount }}</span
+        >
         <button
           type="button"
           @click="clearSavedEntries"
-          class="py-2 px-3 rounded text-sm text-white"
+          class="py-2 px-3 rounded text-xs sm:text-sm text-white whitespace-nowrap"
           style="background-color: #e11d48"
         >
-          Clear saved entries
+          Clear saved
         </button>
       </div>
     </div>
@@ -163,27 +177,26 @@ import { ref, onMounted, watch } from 'vue'
 import { Chart } from 'chart.js/auto'
 import Papa from 'papaparse'
 
-/* ===== Chart.js GLOBAL THEME (no hunting through functions) ===== */
-Chart.defaults.color = '#E5E7EB' // axes/ticks text
+/* ===== Chart.js GLOBAL THEME ===== */
+Chart.defaults.color = '#E5E7EB'
 Chart.defaults.font.family = "'Inter', sans-serif"
-Chart.defaults.borderColor = 'rgba(59,130,246,0.3)' // gridlines
-
-Chart.defaults.elements.point.backgroundColor = 'rgba(124,58,237,0.7)' // scatter points fill
-Chart.defaults.elements.point.borderColor = 'rgba(59,130,246,0.8)' // scatter points outline
-Chart.defaults.elements.line.borderColor = 'rgba(124,58,237,0.9)' // aggregate line color
-/* =============================================================== */
+Chart.defaults.borderColor = 'rgba(59,130,246,0.3)'
+Chart.defaults.elements.point.backgroundColor = 'rgba(124,58,237,0.7)'
+Chart.defaults.elements.point.borderColor = 'rgba(59,130,246,0.8)'
+Chart.defaults.elements.line.borderColor = 'rgba(124,58,237,0.9)'
+/* ================================= */
 
 const chartCanvas = ref(null)
 const chartWrapper = ref(null)
 const chartInstance = ref(null)
 const chartData = ref([])
-const mode = ref('scatter') // 'scatter' or 'aggregate'
+const mode = ref('scatter')
 const newAnime = ref({ title: '', members: null, rating: null })
 const STORAGE_KEY = 'popularityChartUserEntries'
 const userEntriesCount = ref(0)
 const MAX_POINTS = 300
 const BIN_COUNT = 8
-const xScaleType = ref('linear') // 'linear' or 'log'
+const xScaleType = ref('linear')
 const hoverAdd = ref(false)
 
 const stats = ref({
@@ -193,7 +206,6 @@ const stats = ref({
   stdRating: null,
   minMembers: null,
   maxMembers: null,
-  medianMembers: null,
 })
 
 function computeStats() {
@@ -201,7 +213,17 @@ function computeStats() {
     (r) => Number.isFinite(r.members) && Number.isFinite(r.rating),
   )
   const count = rows.length
-  if (count === 0) return { ...stats.value, count: 0 }
+  if (count === 0) {
+    return {
+      count: 0,
+      meanRating: null,
+      medianRating: null,
+      stdRating: null,
+      minMembers: null,
+      maxMembers: null,
+    }
+  }
+
   const meanRating = rows.reduce((s, r) => s + r.rating, 0) / count
   const ratings = rows.map((r) => r.rating).sort((a, b) => a - b)
   const medianRating =
@@ -211,10 +233,6 @@ function computeStats() {
   const members = rows.map((r) => r.members).sort((a, b) => a - b)
   const minMembers = members[0]
   const maxMembers = members[members.length - 1]
-  const medianMembers =
-    members.length % 2 === 1
-      ? members[(members.length - 1) / 2]
-      : (members[members.length / 2 - 1] + members[members.length / 2]) / 2
 
   return {
     count,
@@ -223,7 +241,6 @@ function computeStats() {
     stdRating: parseFloat(stdRating.toFixed(3)),
     minMembers,
     maxMembers,
-    medianMembers,
   }
 }
 
@@ -274,6 +291,9 @@ onMounted(() => {
 
       renderChart()
     },
+    error: (err) => {
+      console.error('Failed to load CSV:', err)
+    },
   })
 })
 
@@ -281,27 +301,26 @@ watch(mode, renderChart)
 watch(xScaleType, renderChart)
 
 function renderChart() {
-  try {
-    stats.value = computeStats()
-  } catch {}
+  stats.value = computeStats()
 
-  if (chartInstance.value) chartInstance.value.destroy()
+  if (chartInstance.value) {
+    chartInstance.value.destroy()
+    chartInstance.value = null
+  }
+
+  const ctx = chartCanvas.value
+  if (!ctx) return
 
   if (mode.value === 'aggregate') {
     const rows = chartData.value.filter(
-      (r) => Number.isFinite(r.members) && Number.isFinite(r.rating),
+      (r) => Number.isFinite(r.members) && Number.isFinite(r.rating) && r.members > 0,
     )
-    if (rows.length === 0) {
-      chartInstance.value = null
-      return
-    }
+    if (rows.length === 0) return
 
-    const positiveRows = rows.filter((r) => r.members > 0)
-    const membersVals = positiveRows.map((r) => r.members)
+    const membersVals = rows.map((r) => r.members)
     const min = Math.min(...membersVals)
     const max = Math.max(...membersVals)
-    const autoLog = min > 0 && max / min > 10
-    const useLog = xScaleType.value === 'log' || autoLog
+    const useLog = xScaleType.value === 'log'
 
     let binEdges = []
     if (useLog) {
@@ -317,7 +336,7 @@ function renderChart() {
     for (let i = 0; i < BIN_COUNT; i++)
       bins.push({ low: binEdges[i], high: binEdges[i + 1], items: [] })
 
-    positiveRows.forEach((r) => {
+    rows.forEach((r) => {
       for (let i = 0; i < bins.length; i++) {
         const b = bins[i]
         if (
@@ -347,16 +366,15 @@ function renderChart() {
     const stds = agg.map((a) => a.std)
     const counts = agg.map((a) => a.count)
 
-    chartInstance.value = new Chart(chartCanvas.value, {
+    chartInstance.value = new Chart(ctx, {
       type: 'line',
       data: {
         labels,
         datasets: [
           {
-            label: 'Average Rating (per members bin)',
+            label: 'Average Rating',
             data: avgs.map((v, i) => ({ x: labels[i], y: v })),
-            // line color is already set by Chart.defaults.elements.line.borderColor
-            backgroundColor: 'rgba(124, 58, 237, 0.25)', // translucent fill
+            backgroundColor: 'rgba(124, 58, 237, 0.25)',
             tension: 0.2,
             fill: false,
             pointRadius: counts.map((c) => Math.min(20, 4 + Math.sqrt(c))),
@@ -365,15 +383,16 @@ function renderChart() {
         ],
       },
       options: {
+        responsive: true,
         maintainAspectRatio: false,
         scales: {
           x: {
-            type: xScaleType.value === 'log' ? 'logarithmic' : 'linear',
-            title: { display: true, text: 'Members (bin center)' },
+            type: useLog ? 'logarithmic' : 'linear',
+            title: { display: true, text: 'Members' },
             ticks: { callback: (v) => Number(v).toLocaleString() },
           },
           y: {
-            title: { display: true, text: 'Average Rating' },
+            title: { display: true, text: 'Avg Rating' },
             min: 0,
             max: 10,
             ticks: { stepSize: 1 },
@@ -392,33 +411,31 @@ function renderChart() {
         },
       },
     })
-
-    if (chartInstance.value) chartInstance.value._myPluginData = { stds }
     return
   }
 
-  // scatter
+  // Scatter mode
   const points = chartData.value
     .filter((r) => Number.isFinite(r.members) && Number.isFinite(r.rating))
     .slice(0, MAX_POINTS)
     .map((r) => ({ x: r.members, y: r.rating, title: r.title }))
 
-  chartInstance.value = new Chart(chartCanvas.value, {
+  chartInstance.value = new Chart(ctx, {
     type: 'scatter',
     data: {
       datasets: [
         {
-          label: 'Anime (Members vs Rating)',
+          label: 'Anime',
           data: points,
-          // point colors set by Chart.defaults.elements.point.*
         },
       ],
     },
     options: {
+      responsive: true,
       maintainAspectRatio: false,
       scales: {
         x: {
-          title: { display: true, text: 'Members (Popularity)' },
+          title: { display: true, text: 'Members' },
           type: xScaleType.value === 'log' ? 'logarithmic' : 'linear',
           ticks: { callback: (v) => Number(v).toLocaleString() },
         },
@@ -444,6 +461,12 @@ function addEntry() {
     rating: Number(newAnime.value.rating),
     isUser: true,
   }
+
+  if (!Number.isFinite(entry.members) || !Number.isFinite(entry.rating)) {
+    alert('Please enter valid numbers for members and rating')
+    return
+  }
+
   chartData.value.push(entry)
 
   try {
@@ -462,6 +485,8 @@ function addEntry() {
 }
 
 function clearSavedEntries() {
+  if (!confirm('Are you sure you want to clear all saved entries?')) return
+
   try {
     localStorage.removeItem(STORAGE_KEY)
   } catch (err) {
@@ -492,7 +517,8 @@ function downloadCSV() {
 
 <style scoped>
 canvas {
-  width: 100%;
-  min-height: 500px;
+  width: 100% !important;
+  height: 400px !important;
+  max-height: 500px !important;
 }
 </style>

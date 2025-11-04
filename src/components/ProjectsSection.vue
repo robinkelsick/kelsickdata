@@ -1,21 +1,23 @@
 <template>
   <section
     id="projects"
-    class="flex flex-col justify-center items-center py-20 text-center w-full"
+    class="flex flex-col justify-center items-center py-12 sm:py-16 md:py-20 text-center w-full"
     style="background-color: #111827; color: #e5e7eb; font-family: 'Inter', sans-serif"
   >
-    <h2 class="text-4xl font-bold mb-10" style="font-family: 'Poppins', sans-serif; color: #e5e7eb">
+    <h2
+      class="text-3xl sm:text-4xl font-bold mb-8 sm:mb-10 px-4"
+      style="font-family: 'Poppins', sans-serif; color: #e5e7eb"
+    >
       Projects
     </h2>
 
     <div
-      class="grid gap-8 max-w-6xl mx-auto px-4 justify-center"
-      style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto px-4 w-full"
     >
       <!-- Project 1 -->
       <router-link
         to="/genre-ratings"
-        class="rounded-xl p-6 block transition-transform"
+        class="rounded-xl p-5 sm:p-6 block transition-transform"
         style="
           background-color: #1e293b;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -23,21 +25,27 @@
         "
         @mouseover="hover1 = true"
         @mouseleave="hover1 = false"
+        @touchstart="hover1 = true"
+        @touchend="hover1 = false"
         :style="
           hover1 ? 'transform:translateY(-4px); box-shadow:0 0 18px rgba(124,58,237,0.4);' : ''
         "
       >
-        <h3 class="text-2xl font-semibold mb-2" style="color: #e5e7eb">Anime Ratings by Genre</h3>
-        <p class="mb-4" style="color: #9ca3af">
+        <h3 class="text-xl sm:text-2xl font-semibold mb-2" style="color: #e5e7eb">
+          Anime Ratings by Genre
+        </h3>
+        <p class="mb-4 text-sm sm:text-base" style="color: #9ca3af">
           Visualizing which anime genres score highest on average.
         </p>
-        <span style="color: #7c3aed" class="font-medium hover:underline"> View Project → </span>
+        <span style="color: #7c3aed" class="font-medium hover:underline text-sm sm:text-base">
+          View Project →
+        </span>
       </router-link>
 
       <!-- Project 2 -->
       <router-link
         to="/popularity-vs-rating"
-        class="rounded-xl p-6 block transition-transform"
+        class="rounded-xl p-5 sm:p-6 block transition-transform"
         style="
           background-color: #1e293b;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -45,15 +53,21 @@
         "
         @mouseover="hover2 = true"
         @mouseleave="hover2 = false"
+        @touchstart="hover2 = true"
+        @touchend="hover2 = false"
         :style="
           hover2 ? 'transform:translateY(-4px); box-shadow:0 0 18px rgba(59,130,246,0.4);' : ''
         "
       >
-        <h3 class="text-2xl font-semibold mb-2" style="color: #e5e7eb">Popularity vs Rating</h3>
-        <p class="mb-4" style="color: #9ca3af">
-          Do popular anime always score higher? Let’s find out.
+        <h3 class="text-xl sm:text-2xl font-semibold mb-2" style="color: #e5e7eb">
+          Popularity vs Rating
+        </h3>
+        <p class="mb-4 text-sm sm:text-base" style="color: #9ca3af">
+          Do popular anime always score higher? Let's find out.
         </p>
-        <span style="color: #3b82f6" class="font-medium hover:underline"> View Project → </span>
+        <span style="color: #3b82f6" class="font-medium hover:underline text-sm sm:text-base">
+          View Project →
+        </span>
       </router-link>
     </div>
   </section>
