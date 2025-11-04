@@ -3,8 +3,8 @@
     <div class="photo-section w-full md:w-1/2 flex justify-center">
       <img
         src="https://cdn.jsdelivr.net/gh/robinkelsick/kelsickdata@main/public/me_illustration.png"
-        alt="Illustrated portrait of Robin Kelsick II"
-        class="rounded-2xl shadow-lg max-w-xs"
+        alt="A digital illustration of a Robin Kelsick II with blond dreadlocks and a nose ring, looking upward. They wear a red hoodie and white shirt, exuding confidence."
+        class="w-64 h-auto max-w-full rounded-full shadow-md"
       />
     </div>
 
