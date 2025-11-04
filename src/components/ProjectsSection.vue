@@ -1,7 +1,14 @@
 <template>
-  <section id="projects" class="py-20 bg-gray-800 text-white text-center">
+  <section
+    id="projects"
+    class="flex flex-col justify-center items-center py-20 bg-gray-800 text-white text-center h-full w-full"
+  >
     <h2 class="text-4xl font-bold mb-10">Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+
+    <div
+      class="grid gap-8 max-w-6xl mx-auto px-4 justify-center"
+      style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))"
+    >
       <router-link
         to="/genre-ratings"
         class="bg-gray-900 rounded-xl p-6 hover:bg-gray-700 transition-all block"
@@ -10,6 +17,7 @@
         <p class="text-gray-400 mb-4">Visualizing which anime genres score highest on average.</p>
         <span class="text-indigo-400 hover:text-indigo-300">View Project →</span>
       </router-link>
+
       <router-link
         to="/popularity-vs-rating"
         class="bg-gray-900 rounded-xl p-6 hover:bg-gray-700 transition-all block"
