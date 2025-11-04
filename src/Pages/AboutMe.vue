@@ -2,7 +2,7 @@
   <section class="about-container flex flex-col md:flex-row items-center gap-10 p-6">
     <div class="photo-section w-full md:w-1/2 flex justify-center">
       <img
-        src="/public/me_illustration.png"
+        src="https://cdn.jsdelivr.net/gh/robinkelsick/kelsickdata@main/public/me_illustration.png"
         alt="Illustrated portrait of Robin Kelsick II"
         class="rounded-2xl shadow-lg max-w-xs"
       />
