@@ -40,6 +40,23 @@
       SQL, and Tableau to uncover insights that inform smarter decisions and tell clearer stories.
     </p>
   </section>
+  <section class="my-toolbox max-w-4xl mx-auto p-6 space-y-4">
+    <h2 class="text-2xl font-semibold">My Toolbox</h2>
+
+    <p class="text-gray-700 leading-relaxed">
+      Tools and languages I use to turn data into insight:
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Python</span>
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">SQL</span>
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Excel</span>
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Tableau</span>
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Vue.js</span>
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">Pandas</span>
+      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-md">GitHub</span>
+    </div>
+  </section>
 </template>
 
 <script setup>
