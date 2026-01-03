@@ -133,9 +133,8 @@ const vIcon = OhVueIcon
 const hover = ref(false)
 
 function downloadResume() {
-  const link = document.createElement('a')
-  link.href = '/current_resume.pdf'
-  link.download = 'Robin_Kelsick_Resume.pdf'
-  link.click()
+  // Open Google Docs export URL (PDF) in a new tab so the user can download or view.
+  const url = 'https://docs.google.com/document/d/1hxXNp7PZ7OW4Ml6QXtybF5ZoTdfe7ImNR2BsdqCCasA/export?format=pdf'
+  window.open(url, '_blank', 'noopener')
 }
 </script>
