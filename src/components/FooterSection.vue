@@ -44,6 +44,18 @@
         >
           <vIcon name="co-linkedin-in" :scale="isMobile ? '1' : '1.2'" />
         </a>
+        <a
+          href="https://www.kaggle.com/robinkelsick"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-indigo-400 transition flex items-center"
+          aria-label="Kaggle"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 text-[#20beff]" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.5 9.5c0 1.933-1.567 3.5-3.5 3.5S8.5 13.433 8.5 11.5 10.067 8 12 8s3.5 1.567 3.5 3.5zM12 17c2.761 0 5-2.239 5-5h-2c0 1.657-1.343 3-3 3s-3-1.343-3-3H7c0 2.761 2.239 5 5 5z"/>
+          </svg>
+          <span class="sr-only">Kaggle</span>
+        </a>
       </div>
     </div>
 
