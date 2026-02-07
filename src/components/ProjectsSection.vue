@@ -55,6 +55,46 @@
           </li>
         </ul>
       </a>
+
+      <!-- Retail Customer Segmentation Analysis -->
+      <a
+        href="https://colab.research.google.com/drive/1ZlZsh1GjNlB0h0e9mVaybCgWfYyXvInw?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-xl p-5 sm:p-6 block transition-transform text-left"
+        style="
+          background-color: #1e293b;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(96,165,250,0.08);
+        "
+        @mouseover="hoverQuantium = true"
+        @mouseleave="hoverQuantium = false"
+        @touchstart="hoverQuantium = true"
+        @touchend="hoverQuantium = false"
+        :style="hoverQuantium ? 'transform:translateY(-4px); box-shadow:0 0 18px rgba(59,130,246,0.25);' : ''"
+        aria-label="Retail Customer Segmentation Analysis"
+      >
+        <h3 class="text-xl sm:text-2xl font-semibold mb-2" style="color: #e5e7eb">
+          Retail Customer Segmentation Analysis
+        </h3>
+
+        <p class="mb-3 text-sm sm:text-base" style="color: #9ca3af">
+          End-to-end retail analytics project analyzing customer purchasing behaviour
+          in the chip category to inform short-term category strategy.
+        </p>
+
+        <ul class="text-sm sm:text-base space-y-2 text-gray-300 mb-4">
+          <li>• Cleaned and validated transaction and customer datasets</li>
+          <li>• Identified and removed non-household purchasing outliers</li>
+          <li>• Segmented customers by lifestage and value tier</li>
+          <li>• Analyzed sales drivers and pack size preferences</li>
+          <li>• Delivered data-backed category recommendations</li>
+        </ul>
+
+        <p class="text-sm text-[#20beff] font-medium">
+          View analysis notebook →
+        </p>
+      </a>
     </div>
   </section>
 </template>
@@ -62,4 +102,5 @@
 <script setup>
 import { ref } from 'vue'
 const hover3 = ref(false)
+const hoverQuantium = ref(false)
 </script>
