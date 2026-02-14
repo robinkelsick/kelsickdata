@@ -134,7 +134,7 @@ const hover = ref(false)
 
 function downloadResume() {
   // Open Google Docs export URL (PDF) in a new tab so the user can download or view.
-  const url = 'https://docs.google.com/document/d/1hxXNp7PZ7OW4Ml6QXtybF5ZoTdfe7ImNR2BsdqCCasA/export?format=pdf'
+  const url = 'https://drive.google.com/file/d/1PMNXtvJWU8y7I48cRuRv8Z2Kkec3J-J_/view?usp=sharing'
   window.open(url, '_blank', 'noopener')
 }
 </script>
