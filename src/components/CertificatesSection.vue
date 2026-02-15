@@ -45,24 +45,19 @@ import { ref } from 'vue'
 
 const certificates = ref([
   {
-    title: 'Machine Learning Foundations',
-    issuer: 'Coursera (DeepLearning.AI)',
-    date: '2021',
-    href: 'https://www.coursera.org',
-    description: 'Introductory machine learning concepts, supervised learning and model evaluation.'
-  },
-  {
-    title: 'Data Analysis with Python',
-    issuer: 'IBM',
-    date: '2020',
-    href: '',
-    description: 'Hands-on data cleaning and exploratory analysis using pandas and NumPy.'
-  },
-  {
-    title: 'Google Data Analytics Professional Certificate',
+    title: 'Google Data Analytics',
     issuer: 'Google',
-    date: '2022',
-    href: 'https://grow.google',
+    date: '2026',
+    href: 'https://coursera.org/share/157ad1b8245ecfa03e0c4fc1074e8d60',
+    credentialId: 'BL93J5VM2U7Q',
+    description: ''
+  },
+  {
+    title: 'Quantium Data Analytics Job Simulation',
+    issuer: 'Quantium (Via Forage)',
+    date: '2026',
+    href: 'https://www.theforage.com/completion-certificates/32A6DqtsbF7LbKdcq/NkaC7knWtjSbi6aYv_32A6DqtsbF7LbKdcq_697b4dce4fbf8c8be5fba240_1771019576362_completion_certificate.pdf',
+    credentialId: 'BsbtnLBrTvS4oCfqh',
     description: ''
   }
 ])
