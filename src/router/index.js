@@ -5,6 +5,7 @@ import PopularityPage from '@/Pages/PopularityPage.vue'
 import AboutMe from '@/Pages/AboutMe.vue'
 import ProjectsPage from '@/Pages/ProjectsPage.vue'
 import ContactPage from '@/Pages/ContactPage.vue'
+import CertificatesPage from '@/Pages/CertificatesPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,7 @@ const router = createRouter({
     },
     { path: '/about-me', name: 'about-me', component: AboutMe, alias: '/about' },
     { path: '/projects', name: 'projects', component: ProjectsPage, alias: '/work' },
+    { path: '/certificates', name: 'certificates', component: CertificatesPage },
     { path: '/contact', name: 'contact', component: ContactPage },
   ],
 })

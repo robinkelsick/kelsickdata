@@ -52,6 +52,14 @@
       </router-link>
 
       <router-link
+        to="/certificates"
+        class="hover:text-blue-400 transition-colors"
+        active-class="text-blue-400 font-semibold"
+      >
+        Certificates
+      </router-link>
+
+      <router-link
         to="/contact"
         class="hover:text-blue-400 transition-colors"
         active-class="text-blue-400 font-semibold"
@@ -90,6 +98,15 @@
         @click="isOpen = false"
       >
         Projects
+      </router-link>
+
+      <router-link
+        to="/certificates"
+        class="text-2xl hover:text-blue-400 transition-colors"
+        active-class="text-blue-400 font-semibold"
+        @click="isOpen = false"
+      >
+        Certificates
       </router-link>
 
       <router-link
